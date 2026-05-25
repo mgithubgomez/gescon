@@ -1,0 +1,35 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: concesionario_ef
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: concesionario
+
+    ports:
+      - "3308:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: gescon_ef
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: concesionario
+
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
