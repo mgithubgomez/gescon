@@ -1,0 +1,6 @@
+name: Deploy AWS
+
+on:
+  push:
+    branches:
+      - main
